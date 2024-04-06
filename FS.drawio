@@ -1,16 +1,16 @@
-<mxfile host="app.diagrams.net" modified="2024-04-01T14:01:24.323Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15" etag="AJIU6deInb3nYdXvEJgg" version="24.0.5" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-06T00:19:56.713Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15" etag="gRDlOjUJBSGhF_H22k7x" version="24.0.5" type="github">
   <diagram name="第 1 页" id="Q-Ag9m_etdxxbcrkzomp">
     <mxGraphModel dx="820" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="BjoLQJ9FOb16xbEdaIAv-1" value="&lt;div&gt;一期函数集：&lt;/div&gt;open&lt;div&gt;create&lt;/div&gt;&lt;div&gt;close&lt;br&gt;&lt;div&gt;read&lt;/div&gt;&lt;div&gt;write&lt;/div&gt;&lt;div&gt;mkdir&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="BjoLQJ9FOb16xbEdaIAv-1" value="&lt;div&gt;一期函数集：&lt;/div&gt;open&lt;div&gt;chmod&lt;/div&gt;&lt;div&gt;close&lt;br&gt;&lt;div&gt;read&lt;/div&gt;&lt;div&gt;write&lt;/div&gt;&lt;div&gt;mkdir&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="220" y="110" width="100" height="210" as="geometry" />
         </mxCell>
         <mxCell id="BjoLQJ9FOb16xbEdaIAv-2" value="POSIX函数实现及数据结构" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="15" y="208" width="170" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BjoLQJ9FOb16xbEdaIAv-3" value="数据结构：&lt;div&gt;1、文件目录树：将硬盘上的目录树整理到内存中，以供快速读取&lt;/div&gt;&lt;div&gt;2、inode-map：将inode号与块号映射关系记录下来&lt;/div&gt;&lt;div&gt;3、写入缓冲区：将写入缓存到内存中，集攒够一个段后再写入&lt;/div&gt;&lt;div&gt;4、读出缓冲区：将读出的块进行存储，利用局部性原理&lt;/div&gt;&lt;div&gt;5、空闲区块链：记录整理出来的空闲段地址号&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="BjoLQJ9FOb16xbEdaIAv-3" value="数据结构：&lt;div&gt;1、文件目录树：将硬盘上的目录树整理到内存中，以供快速读取&lt;/div&gt;&lt;div&gt;2、inode-map：将inode号与块号映射关系记录下来&lt;/div&gt;&lt;div&gt;3、写入缓冲区：将写入缓存到内存中，集攒够一个段后再写入&lt;/div&gt;&lt;div&gt;4、读出缓冲区：将读出的块进行存储，利用局部性原理&lt;/div&gt;&lt;div&gt;5、空闲区块链：记录整理出来的空闲段地址号&lt;/div&gt;&lt;div&gt;6、打开文件表：记录当前打开的inode以及缓存位置&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="320" y="110" width="370" height="210" as="geometry" />
         </mxCell>
         <mxCell id="BjoLQJ9FOb16xbEdaIAv-4" value="read：将块号翻译成flash芯片对应的电信号拿到数据&lt;div&gt;write：将块号和数据写到flash对应位置&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
