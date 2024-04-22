@@ -16,4 +16,4 @@ int32_t readSegement(uint32_t startBlock,char *res);
 
 int32_t writeFlashBlock(uint32_t blk,char *contents);
 
-int32_t readFileBlock(uint32_t blk,char *res)
+int32_t readFileBlock(uint32_t blk,char *res);
