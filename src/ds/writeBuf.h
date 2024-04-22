@@ -1,15 +1,17 @@
 #include "src/ds/inode.h"
 
-typedef struct{
-    //指示块位置，单位是块
-    uint16_t offset;
-    //指示所属文件号
+struct SSEntry{
+    //指示所属文件号（危险注意：这里应该是32位的，但是为了减小空间强行改成了16位，以后解决）
     uint16_t inode_num;
-}SSEntry;
+    //如果是FILEBLOCK则该项指示块偏移，否则该项指示块中inode个数
+    uint32_t offset;
+    //指示是否为FILEBLOCK（以防是INODEBLOCK）
+    uint8_t isFILE;
+}__attribute__((packed)) ;
+
+typedef struct SSEntry SSEntry;
 
 typedef struct{
-    //段总结表下一个要写的位置
-    uint32_t ssPos;
     //将要写入的flash位置
     uint32_t flashFreePos;
     //指使下一次要写入的位置，单位是文件块
