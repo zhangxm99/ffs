@@ -4,7 +4,7 @@
 #define INODESIZE sizeof(Inode)
 
 //128byte
-typedef struct{
+struct Inode{
     uint32_t inode_num;
     char name[MAXSTRINGLENGTH];
     //高1位标志是否为目录，低9位为权限标注
@@ -14,4 +14,6 @@ typedef struct{
     uint32_t size;
     //MAXDIRECT个一级块，1个二级块，1个三级块
     uint32_t indexes[MAXDIRECT+2];
-} Inode;
+} __attribute__((packed));
+
+typedef struct Inode Inode;
