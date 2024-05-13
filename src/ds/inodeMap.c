@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "inodeMap.h"
 
-extern InodeMap *mp;
+extern InodeMap *imap;
 
 static inline uint32_t hash32shift(uint32_t key) 
 { 
@@ -42,7 +42,7 @@ InodeMap generateInodeMap(){
 
 uint32_t* mapInode(uint32_t inode_num){
     int offset = hash32shift(inode_num);
-    ListofPhy *p = mp->mp[offset];
+    ListofPhy *p = imap->mp[offset];
     while(p){
         if(p->key == inode_num) return &(p->value);
         p = p->next;
@@ -52,7 +52,7 @@ uint32_t* mapInode(uint32_t inode_num){
 
 void deleteInode(uint32_t inode_num){
     int offset = hash32shift(inode_num);
-    ListofPhy *p = mp->mp[offset];
+    ListofPhy *p = imap->mp[offset];
     while(p->next){
         if((p->next).key == inode_num) {
             ListofPhy *n = (p->next).next;
@@ -65,7 +65,7 @@ void deleteInode(uint32_t inode_num){
 
 void insertInode(uint32_t inode_num,uint32_t phy){
     int offset = hash32shift(inode_num);
-    ListofPhy *p = mp->mp[offset];
+    ListofPhy *p = imap->mp[offset];
 
     ListofPhy *n = (ListofPhy *)malloc(sizeof(ListofPhy));
     *n = (ListofPhy){inode_num,phy,NULL};

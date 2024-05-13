@@ -4,7 +4,7 @@
 #include "src/ds/freeSegment.h"
 
 extern Segment *segment;
-extern InodeMap *mp;
+extern InodeMap *imap;
 
 Segment initializeWriteBuf(void){
     Segment s{
@@ -19,7 +19,7 @@ Segment initializeWriteBuf(void){
 
 static inline void pushGetNewSeg(Segment *segment,uint32_t nextpos){
     for(int i = 0 ;i < MAXINDEX;i++){
-        const ListofPhy *p = (mp->mp)[i];
+        const ListofPhy *p = (imap->mp)[i];
         while(p->next){
             *(uint32_t *)(segment->seg + nextpos) = (p->next).key;
             *(uint32_t *)(segment->seg + nextpos + 4) = (p->next).value;
@@ -55,7 +55,7 @@ int32_t writeInode(Segment *segment,Inode i){
     segment->inodePos += INODESIZE;
     if(segment->inodePos % FILEBLOCKSIZE == 0){
         uint32_t nextpos = max(segment->inodePos,FILEBLOCKSIZE * (segment->filePos+1));
-        uint32_t blks = ((mp->size - 1) / FILEBLOCKSIZE + 1);
+        uint32_t blks = ((imap->size - 1) / FILEBLOCKSIZE + 1);
         
         ((SSEntry *)(segment->seg) + (nextpos/FILEBLOCKSIZE)) -> blkAttribute = 0;
         ((SSEntry *)(segment->seg) + (nextpos/FILEBLOCKSIZE)) -> offset = 0;
@@ -77,7 +77,7 @@ inline uint32_t writeOneBlk(Segment *segment, uint32_t level ,uint32_t *sz,uint3
     i->size += writeNum;
     //判断是否段已满
     uint32_t nextpos = max(segment->inodePos/FILEBLOCKSIZE,segment->filePos+1);
-    uint32_t blks = ((mp->size - 1) / FILEBLOCKSIZE + 1);
+    uint32_t blks = ((imap->size - 1) / FILEBLOCKSIZE + 1);
     //段已满，写入flash并拿新段
     if(nextpos == SEGMENTLENGTH/FILEBLOCKSIZE - blks){
         pushGetNewSeg(segment,nextpos);
