@@ -98,7 +98,7 @@ static DentryTree dfs(uint32_t inode_num){
     return n;
 }
 
-int32_t searchInode(const char *path,uint8_t permission,uint32_t isCreat,uint32_t is_excl){
+int32_t searchInode(const char *path,uint8_t permission,uint32_t isCreat,uint32_t is_excl,uint32_t is_trunc){
     DentryTree *prev;
     DentryTree *now = treeRoot;
     char seg[MAXSTRINGLENGTH];
@@ -120,7 +120,7 @@ int32_t searchInode(const char *path,uint8_t permission,uint32_t isCreat,uint32_
                 if(isCreat && path[i] == '\0'){
                     //分别在树上和硬盘上创建inode
                     Inode newi;
-                    newi.inode_num = inodeNumAllocator.get();
+                    newi.inode_num = inodeNumAllocator();
                     strcpy(newi.name,seg);
                     newi.isDirAndPermission = 0x8180;
                     newi.ownerID = 0;
@@ -136,9 +136,7 @@ int32_t searchInode(const char *path,uint8_t permission,uint32_t isCreat,uint32_
                     uint32_t pos = writeToBuf(newi,0,NULL,0);
 
                     Inode dirI = getInode(prev.inode_num);
-                    uint32_t newInode = pos;
-                    p->next = 
-                    writeToBuf(dirI,dirI.size,&newInode,1);
+                    writeToBuf(dirI,dirI.size,&pos,4);
                     
                     return now->inode_num;
                 }
@@ -167,10 +165,13 @@ int32_t searchInode(const char *path,uint8_t permission,uint32_t isCreat,uint32_
     //如果文件存在且有CREAT
     if(isCreat){
         if(is_excl) return -3;
-        //清掉所有内容
-        now->sz = 0;
-        
     } 
+    //如果文件存在且有TRUNC,则修改inode将size打成0
+    if(is_trunc){
+        Inode i = getInode(now->inode_num);
+        i.size = 0;
+        writeToBuf(i,0,NULL,0);
+    }
     return now->inode_num;
 
 }

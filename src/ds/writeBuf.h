@@ -3,10 +3,11 @@
 struct SSEntry{
     //指示所属文件号（危险注意：这里应该是32位的，但是为了减小空间强行改成了16位，以后解决）
     uint16_t inode_num;
-    //如果是FILEBLOCK则该项指示块偏移，否则该项指示块中inode个数
+    //如果是FILEBLOCK则该项指示块偏移，如果是INODE该项指示块中inode个数
+    //如果是索引块则指示该索引块在上层高级块中的偏移，如果是-1则表示该块没有上层，直接就是inode中存放的
     uint32_t offset;
-    //指示是否为FILEBLOCK（以防是INODEBLOCK）
-    uint8_t isFILE;
+    //指示是否为FILEBLOCK(1)还是INODEBLOCK（0）还是索引块（例如如果是1级索引块这个值就是-1）
+    int8_t blkAttribute;
 }__attribute__((packed)) ;
 
 typedef struct SSEntry SSEntry;
@@ -23,6 +24,10 @@ typedef struct{
 } Segment;
 
 Segment initializeWriteBuf(void);
+
+inline int32_t writeInode(Segment *segment,Inode i)
+
+inline uint32_t writeOneBlk(Segment *segment,uint32_t level,uint32_t *sz,uint32_t blk,Inode *i,uint8_t *content,uint32_t offset);
 
 //向flash中写入数据和对应的inode，如果缓冲区size为0，则说明只新建文件，不分配块
 //失败则返回-1
