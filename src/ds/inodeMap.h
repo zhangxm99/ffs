@@ -1,3 +1,5 @@
+#ifndef INODEMAP_H
+#define INODEMAP_H
 #include <stdint.h>
 #include "src/blkOps/blkOps.h"
 #define MAXINDEX 1024
@@ -22,4 +24,6 @@ uint32_t* mapInode(uint32_t);
 void insertInode(uint32_t ,uint32_t);
 
 //在映射表中删除一项
-void deleteInode(uint32_t )
+void deleteInode(uint32_t );
+
+#endif

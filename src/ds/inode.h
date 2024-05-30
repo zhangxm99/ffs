@@ -1,3 +1,5 @@
+#ifndef INODE_H
+#define INODE_H
 #include <stdint.h>
 #define MAXDIRECT 11
 #define MAXSTRINGLENGTH 64
@@ -17,3 +19,6 @@ struct Inode{
 } __attribute__((packed));
 
 typedef struct Inode Inode;
+
+#endif
+

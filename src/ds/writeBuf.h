@@ -1,3 +1,6 @@
+#ifndef WRITEBUF_H
+#define WRITEBUF_H
+
 #include "src/ds/inode.h"
 
 struct SSEntry{
@@ -33,3 +36,5 @@ inline uint32_t writeOneBlk(Segment *segment,uint32_t level,uint32_t *sz,uint32_
 //失败则返回-1
 //调用该函数时必须保证lseekPos不超过文件大小
 int32_t writeToBuf(Inode i,uint32_t lseekPos,uint8_t *content,uint32_t sz);
+
+#endif

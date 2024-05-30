@@ -1,3 +1,6 @@
+#ifndef OPENFILETABLE_H
+#define OPENFILETABLE_H
+
 #define MAXOPENFILE 1024
 #include <stdint.h>
 
@@ -21,4 +24,6 @@ OpenFileTable initialize();
 //放一个inode，要一个文件描述符号,如果打开文件项已满则返回-1
 uint32_t putInodeInOpenFileTable(Inode,uint32_t);
 
+
+#endif
 
