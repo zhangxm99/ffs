@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-ReadBuffer *head = NULL;
-
 #include "writeBuf.h"
+
+ReadBuffer *head = NULL;
 
 extern Segment *segment;  
 
