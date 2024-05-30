@@ -1,3 +1,6 @@
+#ifndef BLKOPS_H
+#define BLKOPS_H
+
 #include <stdint.h>
 #define MEMFLASHSIZE 512*1024*1024
 //读取的大小（flash的page）等于文件块的大小
@@ -17,3 +20,5 @@ int32_t readSegement(uint32_t startBlock,char *res);
 int32_t writeFlashBlock(uint32_t blk,char *contents);
 
 int32_t readFileBlock(uint32_t blk,char *res);
+
+#endif
