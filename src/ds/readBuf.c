@@ -14,7 +14,7 @@ uint8_t* findBlockInWriteBuffer(uint32_t inode_num, uint32_t offset) {
     uint32_t count = *(uint32_t *)(segment->seg);  // 假设 filePos 表示当前段中的条目数
 
     for (uint32_t i = 0; i < count; i++) {
-        if (entries[i].inode_num == inode_num && entries[i].blkAttribute == 1 && entries[i].offset == offset) {
+        if (entries[i].inode_num == inode_num && entries[i].blkAttribute == 1 && entries[i].offset*FILEBLOCKSIZE == offset) {
             // 假设每个条目后面紧跟着它的数据块
             return (uint8_t *)(segment->seg) + FILEBLOCKSIZE *(i+1);
         }
