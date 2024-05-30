@@ -1,3 +1,6 @@
+#ifndef FILEOPS_H
+#define FILEOPS_H
+
 #define O_RDONLY        00
 #define O_WRONLY        01
 #define O_RDWR          02 
@@ -17,3 +20,9 @@
 //   2）同步硬盘：O_SYNC
 //            没有这个flag，则只把数据写入缓冲区就返回了，加上这个则写一次就直接放到硬盘上
 int open(const char *pathname, uint32_t flags);
+
+ssize_t read(int filedes, void *buf, size_t nbyte);
+
+ssize_t write(int filedes, const void *buf, size_t nbyte);
+
+#endif
